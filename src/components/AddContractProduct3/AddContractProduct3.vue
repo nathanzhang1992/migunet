@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <v-Pop></v-Pop>
+    <v-Location :selected="selected" :showLocation="showLocation"></v-Location>
     <v-Header></v-Header>
     <div class="main-wrapper">
       <div class="nav-wrapper">
@@ -159,13 +160,7 @@
               <div class="input-row">
                 <span class="input-text"> <span class="required">*</span>业务归属地：</span>
             <span class="row-wrapper row-wrapper-new">
-              <select name="city-select" id="city-select">
-                <option>广州</option>
-                <option>深圳</option>
-                <option>北京</option>
-                <option>南京</option>
-                <option>上海</option>
-              </select>
+              <input name="city-select" id="city-select" v-model="location" @click="selectLocation">
             </span>
               </div>
               <div class="input-row">
@@ -192,6 +187,7 @@
   import Mock from 'mockjs'
   import PickDate from '../PickDate/PickDate'
   import vPop from '../common/Pop'
+  import vLocation from  '../common/Location'
   export default {
     name: 'AddContractProduct',
     components: {
@@ -199,16 +195,23 @@
       vTable,
       vNav,
       PickDate,
-      vPop
+      vPop,
+      vLocation
     },
-    data ()
-  {
-    return {}
-  }
-  ,
-  methods:{
-
-  }
+    data() {
+      return {
+        location:'',
+        showLocation: false
+      }
+    },
+    methods:{
+      selected(location){
+        this.location = location;
+      },
+      selectLocation() {
+        this.showLocation = true;
+      }
+    }
   }
 </script>
 

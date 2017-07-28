@@ -1,15 +1,15 @@
 <template>
 <div class="mask" v-bind:class="{show:isShow}">
-  
+
   <div class="dialog">
     <div class="dialog-head">
       <div class="dialog-title">
         新增产品结果
       </div>
       <div class="close" @click="closeMask">
-       
+
       </div>
-      
+
     </div>
     <div class="dialog-icon">
          <img src="../../assets/success.png" alt="">
@@ -21,7 +21,7 @@
         你可以去产品中心查看产品信息
       </div>
       <div class="dialog-btn-wrapper">
-        
+
         <div class="dialog-btn" @click="closeMask">
           <Confirm-Button text="确定"></Confirm-Button>
         </div>
@@ -29,7 +29,7 @@
           <CancelButton text="继续新增"></CancelButton>
         </div>
       </div>
-    
+
 
   </div>
 </div>

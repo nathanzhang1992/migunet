@@ -6,6 +6,7 @@ import AddContractProduct2 from '@/components/AddContractProduct2/AddContractPro
 import AddContractProduct3 from '@/components/AddContractProduct3/AddContractProduct3'
 import Reviewed from '@/components/Reviewed/Reviewed'
 import Pop from '@/components/common/Pop'
+import Location from '@/components/common/Location'
 import Home from '@/components/Home/Home'
 
 
@@ -45,11 +46,16 @@ export default new Router({
       name: 'Reviewed',
       component: Reviewed
     },
-    
+
     {
       path: '/Pop',
       name: 'Pop',
       component: Pop
+    },
+    {
+      path: '/Location',
+      name: 'Location',
+      component: Location
     }
   ]
 })
