@@ -16,7 +16,7 @@ body{
   margin: 0;
 }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family:'Microsoft YaHei','Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #333333;
@@ -28,11 +28,11 @@ input,textarea{
 	border:solid 1px #d6e1e5;
 }
 
- :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+ /*:-moz-placeholder { 
     color: #d6e1e5;  
 }
 
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+::-moz-placeholder { 
     color: #d6e1e5;
 }
 
@@ -47,5 +47,5 @@ select {
   appearance:none;
  -moz-appearance:none;
  -webkit-appearance:none;  
-}
+}*/
 </style>

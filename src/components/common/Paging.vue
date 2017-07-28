@@ -137,11 +137,12 @@ ul{
     font-weight: bold;
   }
   .s-select{
-    height: 23px;
+    height: 26px;
     display: block;
     background: #ffffff;
     color: #333333;
     width: 90px;
+    padding-left:5px;
   }
   .perPage{
     display: block;

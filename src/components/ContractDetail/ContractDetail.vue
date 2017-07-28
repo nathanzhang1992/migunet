@@ -19,17 +19,6 @@
             <div class="add-title">
               产品管理新增
             </div>
-            <div class="info-table-wrapper">
-              <Info-Table></Info-Table>
-            </div>
-
-          </div>
-        </div>
-        <div class="add-main">
-          <div class="table-wrapper">
-            <div class="add-title">
-              产品管理新增
-            </div>
             <div class="product-detail-wrapper">
               <div class="pro-three">
                 <div class="pro-wrapper">

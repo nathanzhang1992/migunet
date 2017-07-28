@@ -6,7 +6,7 @@
         <v-Nav></v-Nav>
       </div>
       <div class="table-wrapper" v-on:click="getList">
-        <v-Search></v-Search>
+        <v-Search hideBtn="true"></v-Search>
         <v-Table></v-Table>
         <v-Paging></v-Paging>
       </div>
@@ -17,7 +17,7 @@
 
 <script>
 import vHeader from '../common/Header'
-import vTable  from '../common/Table2'
+import vTable  from '../common/Table'
 import vNav from '../common/Nav'
 import Mock from 'mockjs'
 import calendar from '../common/calendar.vue'

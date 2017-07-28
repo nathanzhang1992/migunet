@@ -318,7 +318,6 @@ var data = Mock.mock('http://address:port/menus',{
 
   .nav-row-wrapper {
     display: none;
-    padding-bottom: 20px;
   }
   .nav-row-wrapper.active{
     display: block;
@@ -365,10 +364,10 @@ var data = Mock.mock('http://address:port/menus',{
 
   .nav-circle {
     display: inline-block;
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     background: #666666;
-    border-radius: 50%;
+    
     margin-right: 5px;
     vertical-align: middle;
   }

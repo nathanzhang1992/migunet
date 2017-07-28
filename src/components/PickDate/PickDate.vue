@@ -6,7 +6,7 @@
             </div>
         </div>
         <transition name="fade">
-    <div class="calendar-dropdown" :style="{'left':(calendar3.left-260)+'px','top':(calendar3.top-80)+'px'}" v-if="calendar3.show">
+    <div class="calendar-dropdown" :style="{'left':(calendar3.left-460)+'px','top':(calendar3.top-80)+'px'}" v-if="calendar3.show">
         <calendar :zero="calendar3.zero" :lunar="calendar3.lunar" :value="calendar3.value" :begin="calendar3.begin" :end="calendar3.end" @select="calendar3.select"></calendar>
     </div>
     </transition>
@@ -18,13 +18,14 @@
 import calendar from '../common/calendar.vue'
 export default {
   name: 'PickDate',
+  props:['defaultText'],
   components:{
     calendar
   },
   data(){
         return {
             calendar3:{
-                display:"请输入日期",
+                display:this.defaultText,
                 show:false,
                 zero:true,
                 // value:[2018,2,16], //默认日期
@@ -90,6 +91,7 @@ export default {
 }
 .flex>div>input{
     box-sizing: border-box;
+    font-size: 12px !important;
     width:100%;
     border-radius: 2px;
     border:1px solid #dedede;

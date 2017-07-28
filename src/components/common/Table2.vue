@@ -1,14 +1,18 @@
 <template>
-<div class="table-container">
+  <div class="table-container">
+    <!-- <v-Search v-on:searchInfo="searchSelect"></v-Search> -->
     <div class="main-area">
     <table class="NewTable2">
       <thead>
       <tr>
-        <td width="150">提交时间</td>
-        <td>申请类型</td>
+        <td width="150">产品名称</td>
+        <td>产品ID</td>
         <td>CP／TP ID</td>
-        <td>审批结果</td>
-        <td>审批失败原因</td>
+        <td>子产品类型</td>
+        <td>资费(分)</td>
+        <td>业务状态</td>
+        <td>审批状态</td>
+        <td class="s-option">操作</td>
       </tr>
       </thead>
       <tbody>
@@ -16,27 +20,26 @@
         <td>
           <div class="l-app-name">{{item.Name}}</div>
         </td>
-        <td>{{item.ProductId}}</td><td>{{item.CpId}}</td>
-        
-        <td v-if="item.Fee==0" class="tb-fail">
-        	不通过
-        </td>
-        <td v-else class="tb-success">
-        	通过
-        </td>
+        <td>{{item.ProductId}}</td>
+        <td>{{item.CpId}}</td>
+        <td>{{item.Fee}}</td>
+        <td>{{item.Fee}}</td>
         <td><span>{{item.Status}}</span></td>
-        <!-- <td class="option td-blue">详情<span class="td-detail td-blue" >详情</span>
-        </td> -->
+        <td><span>{{item.Status}}</span></td>
+        <td class="option td-blue"><span class="td-detail td-blue" >详情</span><span class="td-detail td-blue" >变更信息</span><span class="td-detail td-blue" >更多</span>
+        </td>
       </tr>
       </tbody>
     </table>
   </div>
+  <!-- <v-Paging v-on:listenToChild="showMorePage"></v-Paging> -->
   </div>
   
 
 </template>
-
 <script>
+import vSearch from '../common/Search'
+import vPaging from '../common/Paging'
 import Mock from 'mockjs'
 import axios from 'axios'
 var Random = Mock.Random
@@ -63,7 +66,7 @@ var data1 = Mock.mock('http://address:port/productCenter/productDataDeclareCallb
 "PlatformType":1,
 "BossId":"100001",
 "ProductType":1,
-"Fee|0-1":0,
+"Fee|0-100":100,
 "EnableTag":0,
 "StartTime":"2017-07-13 19:21:00",
 "EndTime":"2017-09-01 10:00:00",
@@ -87,7 +90,7 @@ var data2 = Mock.mock('http://address:port/productCenter/productDataDeclareCallb
 "PlatformType":1,
 "BossId":"100001",
 "ProductType":1,
-"Fee|0-1":0,
+"Fee|0-100":100,
 "EnableTag":0,
 "StartTime":"2017-07-13 19:21:00",
 "EndTime":"2017-09-01 10:00:00",
@@ -111,7 +114,7 @@ var data3 = Mock.mock('http://address:port/productCenter/productDataDeclareCallb
 "PlatformType":1,
 "BossId":"100001",
 "ProductType":1,
-"Fee|0-1":0,
+"Fee|0-100":100,
 "EnableTag":0,
 "StartTime":"2017-07-13 19:21:00",
 "EndTime":"2017-09-01 10:00:00",
@@ -127,38 +130,57 @@ var data3 = Mock.mock('http://address:port/productCenter/productDataDeclareCallb
   export default {
     name: 'Table',
     components:{
-      
+      vSearch,
+      vPaging
+    
     },
     data ()
   {
     return {
-      items: [],
+      // items: [],
       totalPage:1
     }
   },
   computed:{
-    showStatus:function(){
-      // return this.items.filter(function(item){
-      //   if(item.Status==1){
-      //     item.Status='上线';
-      //   }
-      //   if(item.Status==2){
-      //     item.Status='报备';
-      //   }
-      //   return item.Status;
-      // });
+    items:function(){
+      return this.$store.getters.getRes;
     }
 
   },
-  created(){
-    axios.get('http://address:port/productCenter/productDataDeclareCallback').then((res)=>{
-       var res = res.data;
-       this.items=res.ProductInfos;
-    })
+  mounted(){
+    this.$store.dispatch('loadList',1);
+    // this.items=this.$store.getters.getRes;
+    // console.log('data:'+this.items);
 
+    // axios.get('http://address:port/productCenter/productDataDeclareCallback').then((res)=>{
+    //    var res = res.data;
+    //    this.items=res.ProductInfos;
+    // })
+
+    
+    // this.$http.get('http://address:port/productCenter/productDataDeclareCallback').then((res)=>{
+    //    var res=JSON.parse(res.bodyText);
+    //    console.log(res.ProductInfos);
+    //    this.items=res.ProductInfos;
+    
+    // })
   },
   methods:{
-    
+    // showMorePage:function (data) {
+    //   axios.get('http://address:port/productCenter/productDataDeclareCallback?page=1&&pagesize=10').then((res)=>{
+    //    var res = res.data;
+    //    this.items=res.ProductInfos;
+    // })
+    // },
+    searchSelect:function(data){
+      console.log(data);
+      axios.post('http://address:port/productCenter/productDataDeclareCallback?id=100200300').then((res)=>{
+       var res = res.data;
+       this.items=res.ProductInfos;
+       
+    })
+
+    }
   }
 
   }
@@ -177,7 +199,9 @@ var data3 = Mock.mock('http://address:port/productCenter/productDataDeclareCallb
   .NewTable2 {
     width: 100%;
     font-size: 14px;
-    color: #333;    
+    color: #333;
+    border-top: solid 1px #e1e1e1;
+    
     padding-top: 20px;
   }
 
@@ -216,7 +240,7 @@ var data3 = Mock.mock('http://address:port/productCenter/productDataDeclareCallb
 
   .td-detail, .td-edit {
     margin-right: 15px;
-    cursor: default;
+    cursor: pointer;
   }
 
   .l-go, .td-delete, .td-detail, .td-edit {
@@ -254,10 +278,7 @@ var data3 = Mock.mock('http://address:port/productCenter/productDataDeclareCallb
   .tab-item.active{
     background: #ffffff;
   }
-  .tb-fail{
-  	color:#ca3a28;
-  }
-  .tb-success{
-  	color:#72af43;
+  .s-option{
+    text-align: left !important;
   }
 </style>
