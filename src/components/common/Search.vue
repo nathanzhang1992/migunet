@@ -15,11 +15,13 @@
       <input type="text" placeholder="关键信息搜索" />
     </div>
     <div class="l-space l-content-right">
-      <select v-model="selected.selectedItem1" name="StateSelect5" id="StateSelect5" class="StateSelect StateSelect5">
+      <!-- <select v-model="selected.selectedItem1" name="StateSelect5" id="StateSelect5" class="StateSelect StateSelect5">
         <option>待报备</option>
         <option>上线</option>
         <option>下线</option>
-      </select>
+      </select> -->
+      <v-Select></v-Select>
+
     </div>
     <div class="date-container">
         <v-PickDate defaultText="生效时间"></v-PickDate>
@@ -52,12 +54,14 @@
 
 <script>
 import vPickDate from '../PickDate/PickDate'
+import vSelect from '../common/Select'
 
 export default {
   name: 'hello',
   props:['hideBtn'],
   components:{
-    vPickDate
+    vPickDate,
+    vSelect
   },
   data () {
     return {

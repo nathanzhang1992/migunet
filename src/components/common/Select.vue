@@ -1,8 +1,8 @@
 <template>
   <div class="s-wrapper" >
-    <div class="s-select" @click.prevent="showSelect">{{selected}}</div>
-    <div class="option-mask" v-bind:class="{opMask:isShow}">
-      <div class="option-item" @click.prevent="selectItem(option)" v-for="option in options">{{option}}</div>
+    <div class="s-select" @click.stop="showSelect">{{selected}}</div>
+    <div class="option-mask" v-bind:class="{opMask:optionWhatStatus}">
+      <div class="option-item" @click.stop="selectItem(option)" v-for="option in options">{{option}}</div>
       <!--<div class="option-item">222</div>-->
       <!--<div class="option-item">333</div>-->
     </div>
@@ -32,15 +32,21 @@
       },
       isShow:false,
       options:['11','22','33','44'],
-      selected:'',
+      selected:'11',
 
     }
   }
   ,
   computed:{
-    defaultOption(){
-      return this.options[0];
+    optionWhatStatus(){
+      
+      return this.$store.getters.getOptionState;
+
     }
+    
+    // defaultOption(){
+    //   return this.options[0];
+    // }
 
     // fill:function(){
     //   this.slected=this.optionData[0];
@@ -49,14 +55,16 @@
   ,
   methods:{
     showSelect(){
-      this.isShow=!this.isShow;
+      // this.isShow=!this.isShow;
+      this.$store.dispatch('shiftState');
     },
     hideSelect(){
       this.isShow=false;
     },
     selectItem(option){
       this.selected=option;
-      this.isShow=false;
+      this.$store.dispatch('setOptionState',false);
+
     }
     // selectVaule:function(){
     //   this.$emit('sendSlectedValue',this.slected);
@@ -103,6 +111,9 @@
     margin-top: 12px;
     border-radius: 3px;
     display:none;
+    position: relative;
+    z-index:88;
+    background: #ffffff;
 
   &:before {
     position: absolute;

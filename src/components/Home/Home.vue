@@ -1,11 +1,11 @@
 <template>
-<div class="container">
+<div class="container" @click="hideSelectOption">
     <v-Header></v-Header>
     <div class="main-wrapper">
       <div class="nav-wrapper">
         <v-Nav></v-Nav>
       </div>
-      <div class="table-wrapper" v-on:click="getList">
+      <div class="table-wrapper">
         <v-Search></v-Search>
         <v-Table></v-Table>
         <v-Paging></v-Paging>
@@ -48,11 +48,15 @@ export default {
     vPaging
   },
   methods:{
-    getList:function(){
+    hideSelect:function(){
+
       // this.$http.get('http://www.ppt.com').then((data)=>{
       //  var res = JSON.parse(data.bodyText);
       //     console.log(res);
       // });
+    },
+    hideSelectOption(){
+      this.$store.dispatch('setOptionState',false);
     }
 
   }
