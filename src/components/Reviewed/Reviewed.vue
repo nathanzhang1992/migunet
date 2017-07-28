@@ -242,6 +242,17 @@
 
             </div>
           </div>
+          <div class="lay-wrapper">
+            <div class="lay-title">
+              基本信息
+            </div>
+            <div  class="input-row">
+              <span  class="lay-text"> 产品ID：</span>
+              <span  class="lay-r">
+                20990000000921
+              </span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -498,6 +509,13 @@
     line-height: 32px;
   }
 
+  .lay-r {
+    display: inline-block;
+    width: 200px;
+    background: #ffffff;
+    line-height: 32px;
+  }
+
   .row-wrapper-ta {
     width: 340px;
     height: 80px;
@@ -518,6 +536,14 @@
   }
 
   .input-text {
+    width: 185px;
+    display: inline-block;
+    line-height: 32px;
+    margin-right: 30px;
+    text-align: right;
+    vertical-align: top;
+  }
+  .lay-text {
     width: 185px;
     display: inline-block;
     line-height: 32px;
