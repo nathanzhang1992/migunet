@@ -6,7 +6,7 @@
         <v-Nav></v-Nav>
       </div>
       <div class="table-wrapper">
-        <v-Search></v-Search>
+        <v-Search title="合约产品管理"></v-Search>
         <v-Table></v-Table>
         <v-Paging></v-Paging>
       </div>
@@ -38,7 +38,7 @@ var data = Mock.mock('http://www.ppt.com',{
 // console.log(JSON.stringify(data, null, 4));
 
 export default {
-  name: 'Home',
+  name: 'ContractProduct',
   components:{
     vHeader,
     vTable,
