@@ -8,7 +8,7 @@ import AddContractProduct3 from '@/components/AddContractProduct3/AddContractPro
 import ContractDetail from '@/components/ContractDetail/ContractDetail'
 import Reviewed from '@/components/Reviewed/Reviewed'
 import Pop from '@/components/common/Pop'
-import Home from '@/components/Home/Home'
+import ContractProduct from '@/components/ContractProduct/ContractProduct'
 import Product from '@/components/Product/Product'
 
 
@@ -21,8 +21,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'ContractProduct',
+      component: ContractProduct
     },
     {
       path: '/Product',

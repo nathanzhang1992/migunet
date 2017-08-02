@@ -4,7 +4,7 @@
     <div class="l-content-head">
       <div class="vue-left">
         <div class="l-title">
-      单品管理
+      {{title}}
       </div>
       <div class="newAdd" v-bind:class="{addBtn:hideBtn}">
         新增产品
@@ -12,7 +12,7 @@
       </div>
       <div class="vue-right">
         <div class="l-space input-wrapper input-wrapper1">
-      <input type="text" placeholder="关键信息搜索" />
+      <input type="text" placeholder="关键信息搜索" v-model="keyWord" @keyup.enter="searchKeyWord" />
     </div>
     <div class="l-space l-content-right">
       <!-- <select v-model="selected.selectedItem1" name="StateSelect5" id="StateSelect5" class="StateSelect StateSelect5">
@@ -20,14 +20,14 @@
         <option>上线</option>
         <option>下线</option>
       </select> -->
-      <v-Select></v-Select>
+      <v-Select selectType="1" v-bind:options="['上线报备中','上线报备失败','变更报备中']"></v-Select>
 
     </div>
     <div class="date-container">
-        <v-PickDate defaultText="生效时间"></v-PickDate>
+        <v-PickDate defaultText="生效时间" startTime="true"></v-PickDate>
     </div>
     <div class="date-container">
-        <v-PickDate defaultText="失效时间"></v-PickDate>
+        <v-PickDate defaultText="失效时间" startTime="false"></v-PickDate>
     </div>
       </div>
     
@@ -58,7 +58,7 @@ import vSelect from '../common/Select'
 
 export default {
   name: 'hello',
-  props:['hideBtn'],
+  props:['hideBtn','title'],
   components:{
     vPickDate,
     vSelect
@@ -69,13 +69,18 @@ export default {
         selectedItem1:'待报备',
         selectedItem2:'1'
       },
-      isShow:false
+      isShow:false,
+      keyWord:''
       
     }
   },
   methods:{
     search:function(){
       this.$emit('searchInfo',this.selected);
+    },
+    searchKeyWord:function(){
+      this.$store.dispatch('changeKeyWord',this.keyWord)
+      console.log(this.keyWord);
     }
   }
 }

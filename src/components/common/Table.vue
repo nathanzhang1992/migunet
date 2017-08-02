@@ -17,12 +17,13 @@
       <tbody>
       <tr v-for="item in items">
         <td>
-          <div class="l-app-name">{{item.Name}}</div>
+          <div class="l-app-name">{{item.name}}</div>
         </td>
-        <td>{{item.ProductId}}</td><td>{{item.CpId}}</td>
-        <td>{{item.Fee}}</td>
-        <td><span>{{item.Status}}</span></td>
-        <td><span>{{item.Status}}</span></td>
+        <td>{{item.productId}}</td>
+        <td>{{item.cpId}}</td>
+        <td>{{item.fee}}</td>
+        <td><span>{{item.status}}</span></td>
+        <td><span>{{item.auditStatus}}</span></td>
         <td class="option td-blue">详情<!-- <span class="td-detail td-blue" >详情</span> -->
         </td>
       </tr>
@@ -55,26 +56,62 @@ import Mock from 'mockjs'
     }
   },
   computed:{
-    items:function(){
-      return this.$store.getters.getRes;
+    items(){
+      let allData=this.$store.getters.getListData;
+      let list =allData.list;
+      let newList=[];
+      newList=list;
+      if(newList){
+        newList.forEach(function(e){
+        
+        if(e.status=='1'){
+          e.status='上线报备中';
+        }
+        if(e.status=='2'){
+          e.status='上线报备失败';
+        }
+        if(e.status=='3'){
+          e.status='变更报备中';
+        }
+        if(e.status=='4'){
+          e.status='变更报备失败';
+        }
+        if(e.status=='5'){
+          e.status='下线报备中';
+        }
+        if(e.status=='6'){
+          e.status='下线报备失败';
+        }
+        if(e.auditStatus=='1'){
+          e.auditStatus='上线报备中';
+        }
+        if(e.auditStatus=='2'){
+          e.auditStatus='上线报备失败';
+        }
+        if(e.auditStatus=='3'){
+          e.auditStatus='变更报备中';
+        }
+        if(e.auditStatus=='4'){
+          e.auditStatus='变更报备失败';
+        }
+        if(e.auditStatus=='5'){
+          e.auditStatus='下线报备中';
+        }
+        if(e.auditStatus=='6'){
+          e.auditStatus='下线报备失败';
+        }
+      });
+      }
+      
+      return newList;
     }
 
   },
   mounted(){
-    this.$store.dispatch('loadList',1);
+    this.$store.dispatch('loadListData');
     
   },
   methods:{
-  
-    searchSelect:function(data){
-      console.log(data);
-      axios.post('http://address:port/productCenter/productDataDeclareCallback?id=100200300').then((res)=>{
-       var res = res.data;
-       this.items=res.ProductInfos;
-       
-    })
-
-    }
   }
 
   }

@@ -3,7 +3,7 @@
 <!--     <v-Table v-bind:pageNum="current"></v-Table>
  -->
  <span class="perPage">
-   <select  name="s-select" width="400" id="s-select" class="s-select">
+   <!-- <select  name="s-select" width="400" id="s-select" class="s-select">
           <option>1条/页</option>
           <option>2条/页</option>
           <option>3条/页</option>
@@ -11,7 +11,10 @@
           <option>5条/页</option>
           <option>6条/页</option>
           <option>7条/页</option>
-        </select>
+        </select> -->
+
+        <v-Select selectType="2" v-bind:options="['7条/页','8条/页','9条/页','10条/页']"></v-Select>
+
  </span>    
  <ul class="pagination" v-on:click="sendMsgToParent">
       <li   v-show="current != 1" @click="current-- && goto(current)"><a href="javascript:void(0);" class="prev"><</a></li>
@@ -20,7 +23,7 @@
       </li>
       <li v-show="allpage != current && allpage != 0 " @click="current++ && goto(current++)"><a href="javascript:void(0);" class="next">></a></li>
       前往
-      <li class="whichPage"><input type="text"></li>
+      <li class="whichPage"><input v-model="pageSelected"  @keyup.enter="jumpPage" type="text"></li>
       页
     </ul>
 
@@ -30,18 +33,20 @@
 
 <script>
   // import store from '../components/Table'
+  import vSelect from '../common/Select'
   export default {
     name: 'Paging',
     components:{
-      // vTable
+      vSelect
     },
 
     data ()
   {
     return {
-      current: 1,
+      current: 2,
       showItem: 5,
-      allpage: 7
+      allpage: 8,
+      pageSelected:'',
     }
   }
   ,
@@ -77,8 +82,14 @@
      sendMsgToParent:function(){
         // this.$emit("listenToChild",this.current);
         // this.$store.dispatch('changeValue',2);
-        this.$store.dispatch('changeValue',this.current);
+        this.$store.dispatch('changePage',this.current);
+    },
+    jumpPage:function(){
+      this.$store.dispatch('changePageSelected',this.pageSelected);
     }
+  },
+  mounted:function(){
+    this.current=this.$store.getters.getPage;
   }
   }
 </script>

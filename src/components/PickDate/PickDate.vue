@@ -1,8 +1,8 @@
-<template>
+ <template>
     <div class="date-wrapper">
         <div class="flex">
             <div>
-                <input style="position:relative" placeholder="生效时间" type="text" @click="openByDrop($event)" v-model="calendar3.display" readonly>
+                <input style="position:relative"  type="text" @click="openByDrop($event)" v-model="calendar3.display" readonly>
             </div>
         </div>
         <transition name="fade">
@@ -18,7 +18,7 @@
 import calendar from '../common/calendar.vue'
 export default {
   name: 'PickDate',
-  props:['defaultText'],
+  props:['defaultText','startTime'],
   components:{
     calendar
   },
@@ -33,7 +33,14 @@ export default {
                 select:(value)=>{
                     this.calendar3.show=false;
                     this.calendar3.value=value;
-                    this.calendar3.display=value.join("/");
+                    this.calendar3.display=value.join("-");
+                    if(this.startTime=='true'){
+                        this.$store.dispatch('changeStartTime',this.calendar3.value.join("-"));
+                    }
+                    if(this.startTime=='false')
+                    {
+                        this.$store.dispatch('changeEndTime',this.calendar3.value.join("-"));
+                    }
                 }
             }
         }

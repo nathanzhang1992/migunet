@@ -18,7 +18,7 @@
 <script>
   export default {
     name: 'Select',
-    props: ['text', 'w', 'h', 'bg', 'color', 'optionData'],
+    props: ['text', 'w', 'h', 'bg', 'color', 'options','selectType'],
     data ()
   {
     return {
@@ -31,7 +31,7 @@
         optionData: this.optionData
       },
       isShow:false,
-      options:['11','22','33','44'],
+      // options:['上线报备中','上线报备失败','变更报备中'],
       selected:'11',
 
     }
@@ -39,10 +39,16 @@
   ,
   computed:{
     optionWhatStatus(){
+      return this.isShow;
+      // if(this.selectType="1"){
+      //   return this.$store.getters.getOptionState;
+      // }
+      // if(this.selectType="2"){
+      //   return this.$store.getters.getPageSizeState;
+      // }
       
-      return this.$store.getters.getOptionState;
+    },
 
-    }
     
     // defaultOption(){
     //   return this.options[0];
@@ -55,20 +61,43 @@
   ,
   methods:{
     showSelect(){
-      // this.isShow=!this.isShow;
-      this.$store.dispatch('shiftState');
+    this.isShow=!this.isShow;
+      if(this.selectType=='1'){
+        this.$store.dispatch('shiftState');
+      }
+      if(this.selectType=='2'){
+        this.$store.dispatch('changePageOption');
+      }
+      
     },
     hideSelect(){
       this.isShow=false;
     },
     selectItem(option){
       this.selected=option;
-      this.$store.dispatch('setOptionState',false);
+      this.isShow=false;
+      if(this.selectType=='1'){
+        // this.$store.dispatch('setOptionState',false);
+        this.$store.dispatch('changeWhichStatus',option);
+      }
+      if(this.selectType=='2'){
+        // this.$store.dispatch('setOptionState',false);
+        this.$store.dispatch('changePageSize',option);
+      }
+      
 
+    },
+
+    documentHideOption(){
+      let that=this;
+      document.addEventListener('click',function(){
+        that.isShow=false;
+      });
     }
-    // selectVaule:function(){
-    //   this.$emit('sendSlectedValue',this.slected);
-    // }
+
+  },
+  mounted(){
+     this.documentHideOption();
   }
   }
 </script>
